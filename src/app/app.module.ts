@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { SharedModule } from './_modules/shared.module';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 
 @NgModule({ declarations: [
@@ -33,5 +34,13 @@ import { SharedModule } from './_modules/shared.module';
         FormsModule,
         SharedModule
     ],
-         providers: [provideHttpClient(withInterceptorsFromDi())] })
+         providers: [provideHttpClient(
+            withInterceptorsFromDi()
+        ),
+            {
+                provide: HTTP_INTERCEPTORS,
+                useClass: errorInterceptor,
+                multi: true
+              }
+         ] })
 export class AppModule { }
