@@ -16,11 +16,16 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
   }
 
-
-  loadMembers(){
+  loadMembers() {
     this.memberService.getMembers().subscribe({
-      next: members => this.members = members
-    })
+      next: members => {
+        members = members;
+        //console.log(members);
+         debugger;
+       },
+      error: err => {
+        console.error('Error loading members:', err);
+      }
+    });
   }
-
 }
