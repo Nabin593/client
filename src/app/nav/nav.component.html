@@ -15,13 +15,16 @@
               <a class="nav-link" routerLink="/Messages" routerLinkActive="active">Messages</a>
             </li>
           </ng-container>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Errors" routerLinkActive="active">Errors</a>
+          </li>
         </ul>
 
         <!-- this is used to add the nav-dropdown -->
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
           <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle>Welcome {{user.username}}</a>
           <div class="dropdown-menu mt-3" *dropdownMenu>
-            <a class="dropdown-item">Edit Profile</a>
+            <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
             <a class="dropdown-item" (click)="LogOut()">Logout</a>
           </div>
         </div>
