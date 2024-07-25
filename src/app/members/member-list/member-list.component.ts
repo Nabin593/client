@@ -10,7 +10,9 @@ import { Photo } from 'src/app/_models/Photo';
 })
 export class MemberListComponent implements OnInit {
   members: Member[] = [];
+  members: Member[] = [];
 
+  constructor(private memberService: MembersService) { }
   constructor(private memberService: MembersService) { }
 
   ngOnInit(): void {
@@ -24,4 +26,16 @@ export class MemberListComponent implements OnInit {
     })
   }
 
+  loadMembers() {
+    this.memberService.getMembers().subscribe({
+      next: members => {
+        members = members;
+        //console.log(members);
+         debugger;
+       },
+      error: err => {
+        console.error('Error loading members:', err);
+      }
+    });
+  }
 }
